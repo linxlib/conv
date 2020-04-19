@@ -3,7 +3,7 @@ package conv
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gogf/gf/encoding/gbinary"
+
 	"reflect"
 	"strconv"
 	"strings"
@@ -94,11 +94,11 @@ func Convert(i interface{}, t string, params ...interface{}) interface{} {
 	case "[]string":
 		return Strings(i)
 
-	case "Time", "time.Time":
-		if len(params) > 0 {
-			return Time(i, String(params[0]))
-		}
-		return Time(i)
+	//case "Time", "time.Time":
+	//	if len(params) > 0 {
+	//		return Time(i, String(params[0]))
+	//	}
+	//	return Time(i)
 
 	//case "gtime.Time":
 	//	if len(params) > 0 {
@@ -112,8 +112,8 @@ func Convert(i interface{}, t string, params ...interface{}) interface{} {
 	//	}
 	//	return GTime(i)
 
-	case "Duration", "time.Duration":
-		return Duration(i)
+	//case "Duration", "time.Duration":
+	//	return Duration(i)
 	default:
 		return i
 	}
@@ -379,7 +379,7 @@ func Int64(i interface{}) int64 {
 		}
 		return 0
 	case []byte:
-		return gbinary.DecodeToInt64(value)
+		return binary.DecodeToInt64(value)
 	default:
 		s := String(value)
 		isMinus := false
@@ -501,7 +501,7 @@ func Uint64(i interface{}) uint64 {
 		}
 		return 0
 	case []byte:
-		return gbinary.DecodeToUint64(value)
+		return binary.DecodeToUint64(value)
 	default:
 		s := String(value)
 		// Hexadecimal
@@ -536,7 +536,7 @@ func Float32(i interface{}) float32 {
 	case float64:
 		return float32(value)
 	case []byte:
-		return gbinary.DecodeToFloat32(value)
+		return binary.DecodeToFloat32(value)
 	default:
 		v, _ := strconv.ParseFloat(String(i), 64)
 		return float32(v)
@@ -554,7 +554,7 @@ func Float64(i interface{}) float64 {
 	case float64:
 		return value
 	case []byte:
-		return gbinary.DecodeToFloat64(value)
+		return binary.DecodeToFloat64(value)
 	default:
 		v, _ := strconv.ParseFloat(String(i), 64)
 		return v
