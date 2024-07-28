@@ -134,7 +134,7 @@ func Bytes(i interface{}) []byte {
 	}
 	switch value := i.(type) {
 	case string:
-		return []byte(value)
+		return UnsafeStrToBytes(value)
 	case []byte:
 		return value
 	default:
@@ -194,7 +194,7 @@ func String(i interface{}) string {
 	case string:
 		return value
 	case []byte:
-		return string(value)
+		return UnsafeBytesToStr(value)
 	case time.Time:
 		if value.IsZero() {
 			return ""
