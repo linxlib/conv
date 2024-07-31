@@ -13,5 +13,5 @@ func UnsafeStrToBytes(s string) []byte {
 // Note that, if you completely sure you will never use <s> in the feature,
 // you can use this unsafe function to implement type conversion in high performance.
 func UnsafeBytesToStr(b []byte) string {
-	return unsafe.String(unsafe.SliceData(b), len(b))
+	return *(*string)(unsafe.Pointer(&b))
 }
